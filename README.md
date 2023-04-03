@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# React: Commit Activity Chart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Environment
 
-## Available Scripts
+- React Version: 18.2.0
+- Node Version: ^12.18.3
+- Default Port: 3000
 
-In the project directory, you can run:
+X company wants to build a **commit activity chart** similar to GitHub, to visually display commit activity.
 
-### `npm start`
+Img
+![alt text](https://github.com/[maria-an11]/[commit-activity-diagram]/blob/[main]/commit-activity-chart.png?raw=true)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The goal is create a horizontal grid of squares(any size), and color the square depending on the number of commits a specific day has.
+For example, if the date `2019-01-01` has `4 commits`, the color would be Blue.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The coloring rules for each square are as follows:
 
-### `npm test`
+### `Grey (#EBEDF0): 0 commits`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Green (#7BC96F): 1-3 commits`
 
-### `npm run build`
+### `Blue (#6F97C9): 4-6 commits`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `Grey (#FF203C): 7 or more commits`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Use the following API Endpoint to get the commit activity data:
+[https://tinyurl.com/37wzwx5v](https://tinyurl.com/37wzwx5v)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+In order ro speed up the process, you can use the methods below to grab the specific days we want. There is no need to have the dates be dynamic.
 
-### `npm run eject`
+// prefixes single-digit numbers (n) with leading 0 (ie: from 1 to 01)
+const pad = (n) => {
+n = n + "";
+return n.length >= 2 ? n : `0${n}`;
+};
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+// gets the days for the task
+// returns an array of 31 strings like:
+// ['2019-01-01', '2019-01-02', ..., '2019-01-31']
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const getDays = () => {
+const numDays = 31;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    return Array.from(Array(numDays)).map((o, i) => {
+    return `2019-01-${pad(i + 1)}`;
+    });
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+};
+# commit-activity-diagram
